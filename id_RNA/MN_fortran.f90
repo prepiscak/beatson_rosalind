@@ -15,8 +15,7 @@
 ! where "datfile.txt" is the data file containing the string we
 ! want to analyse.
 !
-! Output is four integer counts, corresponding to A, C, G and T,
-! respectively.
+! Output is the string, with all instances of "T" replaced with "U".
 !
 
 ! Ensure that we don't have any undeclared variables
@@ -25,7 +24,7 @@ implicit none
 ! Declare variables
 character(len=64) :: filename
 character(len=:),allocatable :: str
-integer :: iunit, istat, filesize, i, A, C, G, T
+integer :: iunit, istat, filesize, i
 
 ! Step 1: Dynamically get the file-name and read the data into
 !         a character variable (this is the annoying bit!)
