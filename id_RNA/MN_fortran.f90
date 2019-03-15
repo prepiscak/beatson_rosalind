@@ -58,7 +58,7 @@ do i=1,filesize
   if ( str(i:i) .EQ. "T" ) str(i:i) = "U"
 end do
 ! Write the output to the screen (unformatted, since it's a single string)
-write(*,*) str
+write(*,'(A)') str
 
 stop
 end

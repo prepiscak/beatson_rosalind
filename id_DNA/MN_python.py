@@ -1,5 +1,19 @@
+#
+# This script takes a text file containing only the characters
+# A, C, G and T, and counts the number of occurrences of each one.
+#
+# Script is to be run as follows:
+#
+#  python MN_python.py datfile.txt
+#
+# where "datfile.txt" is the data file containing the string we
+# want to analyse.
+
+# Import library to access command line arguments
+import sys
+
 # Define the input filename
-fname = 'data_samp.txt'
+fname = sys.argv[1]
 
 # Read the file into a string
 with open(fname, 'r') as myfile:

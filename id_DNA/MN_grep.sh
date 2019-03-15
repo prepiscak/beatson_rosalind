@@ -1,7 +1,17 @@
 #!/bin/bash
+#
+# This script takes a text file containing only the characters
+# A, C, G and T, and counts the number of occurrences of each one.
+#
+# Script is to be run as follows:
+#
+#  ./MN_grep.sh datfile.txt
+#
+# where "datfile.txt" is the data file containing the string we
+# want to analyse.
 
-# Define the input file
-fname="data_samp.txt"
+# Define the input file (first command line argument)
+fname="$1"
 
 # Count the number of occurrences of the desired character in the file.
 # The -o flag of grep prints each occurrence of the search-string on
