@@ -51,6 +51,14 @@ inquire(file=filename, size=filesize)
 allocate( character(len=filesize) :: str )
 ! Read the data into the character variable
 read(iunit, pos=1, iostat=istat) str
+! Remove the trailing termination character
+do i=filesize,1,-1
+  if ( (str(i:i) .EQ. "A") .OR. &
+       (str(i:i) .EQ. "C") .OR. &
+       (str(i:i) .EQ. "G") .OR. &
+       (str(i:i) .EQ. "T") ) exit
+end do
+filesize = i
 
 ! Step 2: Count the occurrences of each character
 !         (this is the easy/fun bit!)

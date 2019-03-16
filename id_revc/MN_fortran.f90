@@ -1,6 +1,6 @@
 !
-! This program reads in a text file comprising a string, and replaces
-! every instance of "T" with "U".
+! This program reads in a text file containing only the characters
+! A, C, G and T, and calculates its reverse-complement.
 !
 ! Compile using your favourite compiler. I like gfortran:
 !
@@ -12,10 +12,11 @@
 !
 ! ./MN_fortran datfile.txt
 !
-! where "datfile.txt" is the data file containing the string we
-! want to analyse.
+! where "datfile.txt" is the data file containing the string whose
+! reverse-complement we want to calculate.
 !
-! Output is the string, with all instances of "T" replaced with "U".
+! Output is a string containing the reverse-complement of the string
+! contained in "datfile.txt".
 !
 
 ! Ensure that we don't have any undeclared variables
@@ -23,8 +24,8 @@ implicit none
 
 ! Declare variables
 character(len=64) :: filename
-character(len=:),allocatable :: str
-integer :: iunit, istat, filesize, i
+character(len=:),allocatable :: str_in, str_out
+integer :: iunit, istat, filesize, i, j
 
 ! Step 1: Dynamically get the file-name and read the data into
 !         a character variable (this is the annoying bit!)
@@ -46,27 +47,38 @@ if (istat .NE. 0) then
 end if
 ! Get the file size
 inquire(file=filename, size=filesize)
-! Allocate memory for the character variable
-allocate( character(len=filesize) :: str )
-! Read the data into the character variable
-read(iunit, pos=1, iostat=istat) str
+! Allocate memory for the input character variable
+allocate( character(len=filesize) :: str_in )
+! Read the data into the input character variable
+read(iunit, pos=1, iostat=istat) str_in
 ! Remove the trailing termination character
 do i=filesize,1,-1
-  if ( (str(i:i) .EQ. "A") .OR. &
-       (str(i:i) .EQ. "C") .OR. &
-       (str(i:i) .EQ. "G") .OR. &
-       (str(i:i) .EQ. "T") ) exit
+  if ( (str_in(i:i) .EQ. "A") .OR. &
+       (str_in(i:i) .EQ. "C") .OR. &
+       (str_in(i:i) .EQ. "G") .OR. &
+       (str_in(i:i) .EQ. "T") ) exit
 end do
 filesize = i
 
-! Step 2: Replace all instances of "T" with "U" (the easy/fun bit!)
+! Step 2: Compute the reverse-complement of str_in
 !
-! Cycle through each character and increment each count as required
+! Allocate memory for the output character variable
+allocate( character(len=filesize) :: str_out )
+! Cycle through each character and build-up the reverse-complement
 do i=1,filesize
-  if ( str(i:i) .EQ. "T" ) str(i:i) = "U"
+  j = filesize+1-i
+  if ( str_in(i:i) .EQ. "A" ) then
+    str_out(j:j) = "T"
+  else if ( str_in(i:i) .EQ. "C" ) then
+    str_out(j:j) = "G"
+  else if ( str_in(i:i) .EQ. "G" ) then
+    str_out(j:j) = "C"
+  else
+    str_out(j:j) = "A"
+  end if
 end do
-! Write the output to the screen (unformatted, since it's a single string)
-write(*,'(A)') str
+! Write the output to the screen
+write(*,'(A)') str_out
 
 stop
 end
