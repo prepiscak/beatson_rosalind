@@ -36,7 +36,7 @@ integer :: iunit, i
 integer(kind=int64) :: n, k
 integer(kind=int64), dimension(40) :: F
 
-! Step 1: Dynamically get the file-name and read the data
+! Step 1: Dynamically get the file-name and read the input parameters
 !
 !  Get the input filename (the first argument passed from the command line)
 call getarg(1,filename)
@@ -49,6 +49,12 @@ end if
 open(newunit=iunit, file=filename)
 !  Read the two input parameters, n and k
 read(iunit, *) n, k
+!  Make sure that the parameters are valid -- stop if they are not
+if( (n.GT.40) .OR. (k.GT.5) ) then
+  write(*,*) "Invalid input parameters!"
+  write(*,*) "n cannot exceed 40, and k cannot exceed 5"
+  stop
+end if
 
 ! Step 2: Compute the Fibonacci result and write it to the screen
 !  Initialise F(1) = F(2) = 1.
