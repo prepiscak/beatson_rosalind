@@ -3,7 +3,9 @@
 ! n and k, and computes the Fibonacci-based result using the recurrence
 ! relation:
 !
-!     F(n) = F(n-1) + k*F(n-2).
+!     F(n,k) = F(n-1,k) + k*F(n-2,k),
+!
+! where F(1,k) = F(2,k) = 1.
 !
 ! In this program, we're using a recursive function to solve the problem.
 !
@@ -20,7 +22,7 @@
 ! where "datfile.txt" is the data file containing the n and k parameters
 ! that are used to calculate the Fibonacci-based result.
 !
-! Output is the (integer) result of F(n).
+! Output is the (integer) result of F(n,k).
 !
 program fib
 ! Get 64-bit integer type from the Fortran ISO module (required, because
@@ -77,8 +79,6 @@ else
   ! Normal recurrence relation for n>2
   r = F(n-1,k) + k*F(n-2,k)
 end if
-
-return
 
 end function F
 

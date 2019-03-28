@@ -7,17 +7,19 @@
 !
 ! where F(1,k) = F(2,k) = 1.
 !
-! In this program, we're using a simple do loop to solve the problem.
+! In this program, we're using a tail-recursive function to solve the
+! problem. Note that this is essentially solving the problem in reverse,
+! so our recursive function is basically equivalent to a do loop.
 !
 ! Compile using your favourite compiler. I like gfortran:
 !
-! gfortran -O3 -funroll-loops -march=native -ftree-vectorize MN_fortran_loop.f90 -o MN_fortran_loop
+! gfortran -O3 -funroll-loops -march=native -ftree-vectorize MN_fortran_tail_recursive.f90 -o MN_fortran_tail_recursive
 !
-! This will take MN_fortran_loop.f90, and create an executable binary
-! named "MN_fortran_loop". This binary is then run using the following
+! This will take MN_fortran_tail_recursive.f90, and create an executable binary
+! named "MN_fortran_tail_recursive". This binary is then run using the following
 ! command:
 !
-! ./MN_fortran_loop datfile.txt
+! ./MN_fortran_tail_recursive datfile.txt
 !
 ! where "datfile.txt" is the data file containing the n and k parameters
 ! that are used to calculate the Fibonacci-based result.
@@ -34,9 +36,7 @@ implicit none
 
 ! Declare variables
 character(len=64) :: filename
-integer :: iunit, i
-integer(kind=int64) :: n, k
-integer(kind=int64), dimension(40) :: F
+integer :: iunit, n, k
 
 ! Step 1: Dynamically get the file-name and read the input parameters
 !
@@ -59,15 +59,33 @@ if( (n.GT.40) .OR. (k.GT.5) ) then
 end if
 
 ! Step 2: Compute the Fibonacci result and write it to the screen
-!  Initialise F(1) = F(2) = 1.
-F(1:2) = 1
-!  Calculate the Fibonacci sequence from 3:n
-do i=3,n
-  F(i) = F(i-1) + k*F(i-2)
-end do
-!  Write the result to the screen
-write(*,*) F(n)
+!
+write(*,*) F(n, k, 2, 1_int64, 1_int64)
 
 stop
+
+contains
+
+! Declare a tail-recursive function that computes the Fibonacci-based
+! sequence with k offspring pairs at each iteration.
+! Input parameters are as follows:
+!     n: Fibonacci-based iteration that we wish to compute,
+!     k: Number of offspring pairs at each iteration,
+!     i: Number of iterations that have been computed thus far,
+!    Fi: Value of F(i,k),
+!   Fi1: Value of F(i-1,k).
+recursive function F(n, k, i, Fi, Fi1) result(r)
+implicit none
+integer, value :: n, k, i
+integer(kind=int64), value :: Fi, Fi1
+integer(kind=int64) :: r
+
+if ( i.EQ.n ) then
+  r = Fi
+else
+  r = F(n, k, i+1, Fi+k*Fi1, Fi)
+end if
+
+end function F
 
 end program fib

@@ -7,36 +7,45 @@
 !
 ! where F(1,k) = F(2,k) = 1.
 !
-! In this program, we're using a simple do loop to solve the problem.
+! In this program, we're using a recursive function with memoization
+! to solve the problem. Here, we use a global array (contained in a
+! module) to store all previously-computed values, which avoids
+! repeated calculations.
 !
 ! Compile using your favourite compiler. I like gfortran:
 !
-! gfortran -O3 -funroll-loops -march=native -ftree-vectorize MN_fortran_loop.f90 -o MN_fortran_loop
+! gfortran -O3 -funroll-loops -march=native -ftree-vectorize MN_fortran_memoize.f90 -o MN_fortran_memoize
 !
-! This will take MN_fortran_loop.f90, and create an executable binary
-! named "MN_fortran_loop". This binary is then run using the following
+! This will take MN_fortran_memoize.f90, and create an executable binary
+! named "MN_fortran_recursive". This binary is then run using the following
 ! command:
 !
-! ./MN_fortran_loop datfile.txt
+! ./MN_fortran_memoize datfile.txt
 !
 ! where "datfile.txt" is the data file containing the n and k parameters
 ! that are used to calculate the Fibonacci-based result.
 !
 ! Output is the (integer) result of F(n,k).
 !
+
+! Create a module containing the look-up array, Fval
+module vals_mod
+  use iso_fortran_env, only: int64
+  integer(kind=int64), dimension(40) :: Fval
+end module vals_mod
+
 program fib
 ! Get 64-bit integer type from the Fortran ISO module (required, because
 ! the numbers can get extremely large).
-use iso_fortran_env, only: int64
+use vals_mod
 
 ! Ensure that we don't have any undeclared variables
 implicit none
 
 ! Declare variables
 character(len=64) :: filename
-integer :: iunit, i
+integer :: iunit
 integer(kind=int64) :: n, k
-integer(kind=int64), dimension(40) :: F
 
 ! Step 1: Dynamically get the file-name and read the input parameters
 !
@@ -59,15 +68,27 @@ if( (n.GT.40) .OR. (k.GT.5) ) then
 end if
 
 ! Step 2: Compute the Fibonacci result and write it to the screen
-!  Initialise F(1) = F(2) = 1.
-F(1:2) = 1
-!  Calculate the Fibonacci sequence from 3:n
-do i=3,n
-  F(i) = F(i-1) + k*F(i-2)
-end do
-!  Write the result to the screen
-write(*,*) F(n)
+!
+! Initialise Fval(1) = Fval(2) = 1, and all other elements of Fval to 0.
+Fval = 0
+Fval(1:2) = 1
+! Calculate F(n,k) and write the result to the screen
+write(*,*) F(n,k)
 
 stop
+
+contains
+
+! Declare a recursive function that computes the Fibonacci sequence
+! with k offspring pairs at each iteration
+recursive function F(n,k) result(r)
+implicit none
+integer(kind=int64), value, intent(in) :: n, k
+integer(kind=int64) :: r
+
+if(Fval(n).EQ.0) Fval(n) = F(n-1,k) + k*F(n-2,k)
+r = Fval(n)
+
+end function F
 
 end program fib
