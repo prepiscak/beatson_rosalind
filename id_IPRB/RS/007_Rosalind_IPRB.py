@@ -22,9 +22,9 @@ If P(d) is the probability that the offspring has a dominant allele (d), then th
 5. Both homozygous recessive - rr
 
 There are fewer recessive outcomes so calculate this.
-rr = (n/t)*((n-1)/(t-1)) - for 6
-rh = (n/t)*(m/(t-1)) + (m/t)*(n/(t-1)) - for 5
-hh = (m/t)*((m-1)/(t-1))
+rr = (n/t)*((n-1)/(t-1)) - for 5
+rh = (n/t)*(m/(t-1)) + (m/t)*(n/(t-1)) - for 4
+hh = (m/t)*((m-1)/(t-1)) - for 3
 
 Punnet square values for ressive conditions
 rr -> 4/4 = 1
