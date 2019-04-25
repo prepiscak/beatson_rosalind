@@ -14,3 +14,6 @@ http://rosalind.info
 | 11/04/19 | HAMM | [Counting Point Mutations](http://rosalind.info/problems/hamm/) |
 | 11/04/19 | IPRB | [Mendel's First Law](http://rosalind.info/problems/iprb/) |
 | 18/04/19-25/04/19 | PROT | [Translating RNA into Protein](http://rosalind.info/problems/prot/) |
+| 02/05/19 | SUBS | [Finding a Motif in DNA](http://rosalind.info/problems/subs/) |
+| 02/05/19 | CONS | [Consensus and Profile](http://rosalind.info/problems/cons/) |
+| 02/05/19-09/05/19 | FIBD | [Mortal Fibonacci Rabbits](http://rosalind.info/problems/fibd/) |
