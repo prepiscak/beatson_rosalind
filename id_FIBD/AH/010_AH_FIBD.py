@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 #usage 010_AH_FIBD.py n ls
-#where n = months and m - life span in months
+#where n = months and ls - life span in months
 
 #import some stuff
 import sys
@@ -14,7 +14,7 @@ ls=int(sys.argv[2])
 #define a matrix (list of list?)
 #columns are Juveniles and Adults
 #rows are months
-#need m rows to start and everything set to 0
+#need ls rows to start and everything set to 0
 matrix=np.zeros((ls,2))
 
 #matrix
