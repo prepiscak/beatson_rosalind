@@ -35,7 +35,7 @@ matrix= np.vstack([matrix, [1,0]])
 
 #for each following generation
 #J=#A month-1
-#A=(#J month-1 + #A month-1) - #J month-m
+#A=(#J month-1 + #A month-1) - #J month-ls
 
 for i in range(1,n):
    J=matrix[-1,1]
