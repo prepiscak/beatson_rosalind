@@ -38,10 +38,12 @@ for(i in 1:(length(newstrings)-1)) {
 
 # Create a data frame for the first three characters of each string
 df_first <- data.frame(first = string_names,
+                       first_string = strings,
                        string = sapply(strings,function(x) { substr(x,1,3) })
                       )
 # Create a data frame for the last three characters of each string
 df_last <- data.frame(last = string_names,
+                      last_string = strings,
                       string = sapply(strings,function(x) { n <- nchar(x); substr(x,n-2,n) })
                      )
 
@@ -49,7 +51,7 @@ df_last <- data.frame(last = string_names,
 adj <- merge(df_last,df_first)
 
 # Remove self-matches (a string cannot match itself)
-inds <- which(adj$last==adj$first)
+inds <- which(adj$last_string==adj$first_string)
 if(length(inds)>0){
   adj <- adj[-inds,c("last","first"),drop=FALSE]
 } else {
