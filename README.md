@@ -17,3 +17,7 @@ http://rosalind.info
 | 02/05/19 | SUBS | [Finding a Motif in DNA](http://rosalind.info/problems/subs/) |
 | 02/05/19 | CONS | [Consensus and Profile](http://rosalind.info/problems/cons/) |
 | 02/05/19-09/05/19 | FIBD | [Mortal Fibonacci Rabbits](http://rosalind.info/problems/fibd/) |
+| 30/05/19 | GRPH | [Overlap Graphs](http://rosalind.info/problems/grph/) |
+| 06/06/19 | IEV | [Calculating Expected Offspring](http://rosalind.info/problems/iev/) |
+
+
