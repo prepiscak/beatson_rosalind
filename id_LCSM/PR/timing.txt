@@ -1,0 +1,6 @@
+#%timeit %run script.py test2.fasta
+
+bottom up   552 µs ± 13.2 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+bottom up opt   538 µs ± 9.61 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+top bottom  520 µs ± 11.9 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
+
