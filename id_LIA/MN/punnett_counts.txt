@@ -1,0 +1,128 @@
+########
+# AaBb #
+########
+
+AaBb: 4
+AABB: 1
+AABb: 2
+AaBB: 2
+AAbb: 1
+Aabb: 2
+aaBB: 1
+aaBb: 2
+aabb: 1
+
+--===--
+
+########
+# AABB #
+########
+
+AaBb: 4
+AABB: 4
+AABb: 4
+AaBB: 4
+AAbb: 0
+Aabb: 0
+aaBB: 0
+aaBb: 0
+aabb: 0
+
+--===--
+
+########
+# AABb #
+########
+
+AaBb: 4
+AABB: 2
+AABb: 4
+AaBB: 2
+AAbb: 2
+Aabb: 2
+aaBB: 0
+aaBb: 0
+aabb: 0
+
+--===--
+
+########
+# AaBB #
+########
+
+AaBb: 4
+AABB: 2
+AABb: 2
+AaBB: 4
+AAbb: 0
+Aabb: 0
+aaBB: 2
+aaBb: 2
+aabb: 0
+
+--===--
+
+########
+# AAbb #
+########
+
+AaBb: 4
+AABB: 0
+AABb: 4
+AaBB: 0
+AAbb: 4
+Aabb: 4
+aaBB: 0
+aaBb: 0
+aabb: 0
+
+--===--
+
+########
+# Aabb #
+########
+
+AaBb: 4
+AABB: 0
+AABb: 2
+AaBB: 0
+AAbb: 2
+Aabb: 4
+aaBB: 0
+aaBb: 2
+aabb: 2
+
+--===--
+
+########
+# aaBb #
+########
+
+AaBb: 4
+AABB: 0
+AABb: 0
+AaBB: 2
+AAbb: 0
+Aabb: 2
+aaBB: 2
+aaBb: 4
+aabb: 2
+
+--===--
+
+########
+# aabb #
+########
+
+AaBb: 4
+AABB: 0
+AABb: 0
+AaBB: 0
+AAbb: 0
+Aabb: 4
+aaBB: 0
+aaBb: 4
+aabb: 4
+
+--===--
+
