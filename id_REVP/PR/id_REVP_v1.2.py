@@ -12,8 +12,9 @@ def detect_rev_palindromes(dna_string):
     for position in range(len(dna_string)):
         """
         ADD descriptions
-        BUG: fixed bug where there are more substrings from a position (list rather than single value!!!)
-        BUG: fixed range(len(dna_string)-4) to also include last 4 characters!!!
+        BUG: fixed bug where there are more substrings from a position (list rather than single value!)
+        BUG: fixed range(len(dna_string)-4) to also include last 4 characters!
+        BUG: fixed removed enumerate from palindrome_list as this is not needed! 
         """
         # A: generate a list of all dna substrings of length between 4-12 characters starting from position n
         dna_substrings = [dna_string[position:sub_length] for sub_length in range(position+4, position+(12+1)) if sub_length < len(dna_string)+1] # limit length of substring with if
@@ -25,7 +26,7 @@ def detect_rev_palindromes(dna_string):
         
         # C: Update dictionary with new position length of detected palidrome sequences (combination of match between A, B above and position)
         # length rather than actual string
-        palindrome_list = [len(substring) for length, substring in enumerate(dna_substrings) if substring == rev_complement(substring)]
+        palindrome_list = [len(substring) for substring in dna_substrings if substring == rev_complement(substring)]
         if palindrome_list:
             palindrome_dict[position+1] = palindrome_list
     return(palindrome_dict)
